@@ -4,4 +4,4 @@
     - Mounts F:\data folder as /data
 #>
 Set-Variable -name DISPLAY -value 192.168.1.100:0.0
-docker run -ti -e DISPLAY=$DISPLAY -v F:\data:/data apazga/pgmodeler:0.9.1
+docker run -ti -e DISPLAY=$DISPLAY -v F:\data:/data apazga/pgmodeler:0.9.2-alpha
