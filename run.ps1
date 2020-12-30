@@ -12,4 +12,4 @@ Set-Variable -name IPADDR -value ((Get-NetIPAddress).IPAddress -like "192*").Tri
 Set-Variable -name DISPLAY -value $IPADDR":0.0"
 
 Write-Host $DISPLAY
-docker run --rm --name="apazga-pgmodeler" -ti -e DISPLAY=$DISPLAY -v $PSScriptRoot/data:/data apazga/docker-pgmodeler:0.9.3-beta1
+docker run --rm --name="apazga-pgmodeler" -ti -e DISPLAY=$DISPLAY -v $PSScriptRoot/data:/data apazga/docker-pgmodeler:0.9.3
