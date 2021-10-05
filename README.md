@@ -34,15 +34,15 @@ This image compiles & run pgModeler inside a Docker container.
 
 #### Windows (PowerShell script)
 
-To ease launch of pgmodeler, just use `run.ps1`
+To ease launch of pgmodeler, make a copy of the `run.ps1.example` and name it `run.ps1`. Feel free to modify the environment variables inside the file. Making a copy will avoid losing your settings when you will update the repository.
 
 ### Linux
 
-Just run it :)
 
-```docker run -ti -e DISPLAY=192.168.1.100:0.0 -v /home/myname/data/root:/root merinorus/docker-pgmodeler:0.9.4-beta```
+Make a copy of the `.env.linux.example` file and name it `.env.linux`. Feel free to modify the environment variables.
 
-or use the provided script `run.sh`.
+
+Then use the provided script `run.sh`.
 
 ### MacOS
 
@@ -59,6 +59,8 @@ Add the following line to your .zshrc:
 ```export DISPLAY=:0```
 
 You can test XQuartz right now with the command `xeyes`. It should launch a little graphical app.
+
+Then make a copy of the `.env.macos.example` file and name it `.env.macos`. Feel free to modify the environment variables.
 
 Finally, make sure XQuartz is started and launch the script `run_macos.sh`.
 
