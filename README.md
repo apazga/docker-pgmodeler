@@ -60,8 +60,9 @@ If you want to build the image using the Dockerfile provided (it can take a whil
 - 0.9.3-beta1
 - 0.9.3
 - 0.9.4-alpha
+- 0.9.4-beta
 
-Full changelog: <https://github.com/pgmodeler/pgmodeler/blob/v0.9.4-alpha/CHANGELOG.md>
+Full changelog: <https://github.com/pgmodeler/pgmodeler/blob/v0.9.4-beta/CHANGELOG.md>
 
 ## Acknowledgment
 

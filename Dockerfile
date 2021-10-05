@@ -1,8 +1,8 @@
-FROM debian:stretch-slim
+FROM debian:buster-slim
 LABEL Author="@apazga"
 
 # pgModeler version to use
-ENV PG_VERSION 0.9.4-alpha
+ENV PG_VERSION 0.9.4-beta
 
 ADD https://codeload.github.com/pgmodeler/pgmodeler/tar.gz/v${PG_VERSION} /usr/local/src/
 WORKDIR /usr/local/src/
@@ -10,7 +10,7 @@ WORKDIR /usr/local/src/
 # Install dependencies
 RUN BUILD_PKGS="make g++ qt5-qmake libxml2-dev \
   libpq-dev pkg-config libqt5svg5-dev" \
-  && RUNTIME_PKGS="qt5-default libqt5svg5 postgresql-server-dev-9.6" \
+  && RUNTIME_PKGS="qt5-default libqt5svg5 postgresql-server-dev-all" \
   && DEBIAN_FRONTEND=noninteractive \
   && apt-get update \
   && apt-get -y install ${BUILD_PKGS} ${RUNTIME_PKGS}
