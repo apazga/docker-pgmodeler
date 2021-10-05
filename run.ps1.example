@@ -9,7 +9,6 @@
 Set-Variable -name DISPLAY -value 'host.docker.internal:0.0'
 Set-Variable -name PGMODELER_IMAGE -value 'apazga/docker-pgmodeler:0.9.4-beta'
 Set-Variable -name PROJECT_ROOT -value $PSScriptRoot
-Set-Variable -name CONTAINER_NAME -value 'pgmodeler'
 
 
-docker run --rm --name=$CONTAINER_NAME -ti -e DISPLAY=$DISPLAY -v $PROJECT_ROOT/data/root:/root -v  $PROJECT_ROOT/data/usr/local/lib/docker-pgmodeler/plugins:/usr/local/lib/docker-pgmodeler/plugins $PGMODELER_IMAGE
+docker run --rm -ti -e DISPLAY=$DISPLAY -v $PROJECT_ROOT/data/root:/root -v  $PROJECT_ROOT/data/usr/local/lib/docker-pgmodeler/plugins:/usr/local/lib/docker-pgmodeler/plugins $PGMODELER_IMAGE

@@ -4,7 +4,6 @@
 
 # These settings are default one and should not be modified here, because a "git pull" would override your changes.
 # Instead, define your variables in a separate .env file.
-CONTAINER_NAME=pgmodeler
 HOST_IP=192.168.1.100
 PGMODELER_IMAGE=apazga/docker-pgmodeler:0.9.4-beta
 PROJECT_ROOT=/home/toto/docker-pgmodeler
@@ -12,4 +11,4 @@ PROJECT_ROOT=/home/toto/docker-pgmodeler
 # Override environment variables with those from the .env file
 . .env.linux
 
-docker run --rm --name=$CONTAINER_NAME -ti -e DISPLAY=$HOST_IP:0.0 -v $PROJECT_ROOT/data/root:/root -v $PROJECT_ROOT/data/usr/local/lib/docker-pgmodeler/plugins:/usr/local/lib/docker-pgmodeler/plugins $PGMODELER_IMAGE
+docker run --rm -ti -e DISPLAY=$HOST_IP:0.0 -v $PROJECT_ROOT/data/root:/root -v $PROJECT_ROOT/data/usr/local/lib/docker-pgmodeler/plugins:/usr/local/lib/docker-pgmodeler/plugins $PGMODELER_IMAGE
