@@ -26,11 +26,11 @@ This image compiles & run pgModeler inside a Docker container.
 
     Use it with volumes if needed (e.g. to save!):
 
-    ```docker run -ti -e DISPLAY=$DISPLAY -v F:\data:/data apazga/docker-pgmodeler:0.9.4-alpha```
+    ```docker run -ti -e DISPLAY=$DISPLAY -v F:\data:/data apazga/docker-pgmodeler:0.9.4-beta```
 
     You can also specify your DISPLAY IP directly if you don't want to define an environment variable:
 
-    ```docker run -ti -e DISPLAY=192.168.1.100:0.0 -v F:\data:/data apazga/docker-pgmodeler:0.9.4-alpha```
+    ```docker run -ti -e DISPLAY=192.168.1.100:0.0 -v F:\data:/data apazga/docker-pgmodeler:0.9.4-beta```
 
 #### PowerShell script
 
@@ -40,7 +40,7 @@ To ease launch of pgmodeler, just use `run.ps1`
 
 Just run it :)
 
-```docker run -ti -e DISPLAY=192.168.1.100:0.0 -v /home/myname/data:/data apazga/docker-pgmodeler:0.9.4-alpha```
+```docker run -ti -e DISPLAY=192.168.1.100:0.0 -v /home/myname/data:/data apazga/docker-pgmodeler:0.9.4-beta```
 
 or use the provided script `run.sh`.
 
