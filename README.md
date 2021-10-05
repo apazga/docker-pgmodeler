@@ -22,11 +22,11 @@ This image compiles & run pgModeler inside a Docker container.
 
 3. Run docker container
 
-    ```docker run -ti -e DISPLAY=$DISPLAY merinorus/docker-pgmodeler```
+    ```docker run -ti -e DISPLAY=$DISPLAY apazga/docker-pgmodeler```
 
     Use it with volumes if needed (e.g. to save!):
 
-    ```docker run -ti -e DISPLAY=$DISPLAY -v F:\data\root:/root merinorus/docker-pgmodeler:0.9.4-beta```
+    ```docker run -ti -e DISPLAY=$DISPLAY -v F:\data\root:/root apazga/docker-pgmodeler:0.9.4-beta```
 
     You can also specify your DISPLAY IP directly if you don't want to define an environment variable:
 
@@ -70,7 +70,7 @@ I may have forgotten some steps, if any problem please open an issue.
 
 If you want to build the image using the Dockerfile provided (it can take a while!)
 
-```docker build -t merinorus/docker-pgmodeler .```
+```docker build -t apazga/docker-pgmodeler .```
 
 ## Tags
 
