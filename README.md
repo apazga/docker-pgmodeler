@@ -32,7 +32,7 @@ This image compiles & run pgModeler inside a Docker container.
 
     ```docker run -ti -e DISPLAY=192.168.1.100:0.0 -v F:\data\root:/root apazga/docker-pgmodeler:0.9.4-beta```
 
-#### PowerShell script
+#### Windows (PowerShell script)
 
 To ease launch of pgmodeler, just use `run.ps1`
 
@@ -43,6 +43,26 @@ Just run it :)
 ```docker run -ti -e DISPLAY=192.168.1.100:0.0 -v /home/myname/data/root:/root merinorus/docker-pgmodeler:0.9.4-beta```
 
 or use the provided script `run.sh`.
+
+### MacOS
+
+On MacOS (following instructions tested on MacOS Big Sure), if you wish to run this image, you need to install XQuartz. With brew installed, do this:
+
+```brew install xquartz```
+
+Then open Xquartz and allow connections:
+
+```xquartz > preferences > security > [mark to allow connections from network clients]```
+
+Add the following line to your .zshrc:
+
+```export DISPLAY=:0```
+
+You can test XQuartz right now with the command `xeyes`. It should launch a little graphical app.
+
+Finally, make sure XQuartz is started and launch the script `run_macos.sh`.
+
+I may have forgotten some steps, if any problem please open an issue.
 
 ## Build image
 
