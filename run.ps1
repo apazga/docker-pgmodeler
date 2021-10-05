@@ -11,5 +11,4 @@
 Set-Variable -name IPADDR -value ((Get-NetIPAddress).IPAddress -like "192*").Trim()
 Set-Variable -name DISPLAY -value 'host.docker.internal:0.0'
 
-Write-Host $DISPLAY
-docker run --rm --name="apazga-pgmodeler" -ti -e DISPLAY=$DISPLAY -v $PSScriptRoot/data:/data apazga/docker-pgmodeler:0.9.4-alpha
+docker run --rm --name="merinorus-pgmodeler" -ti -e DISPLAY=$DISPLAY -v $PSScriptRoot/data/root:/root -v  $PSScriptRoot/data/usr/local/lib/pgmodeler/plugins:/usr/local/lib/pgmodeler/plugins merinorus/docker-pgmodeler:0.9.4-beta
