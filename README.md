@@ -74,9 +74,18 @@ If you want to build the image using the Dockerfile provided (it can take a whil
 
 ## Tags
 
+- 0.9.1
+- 0.9.2-alpha
+- 0.9.2-alpha1
+- 0.9.2-beta
+- 0.9.2
+- 0.9.3-beta1
+- 0.9.3
+- 0.9.4-alpha
 - 0.9.4-beta
+- 0.9.4-beta1
 
-Full changelog: <https://github.com/pgmodeler/pgmodeler/blob/v0.9.4-beta/CHANGELOG.md>
+Full changelog: <https://github.com/pgmodeler/pgmodeler/blob/v0.9.4-beta1/CHANGELOG.md>
 
 ## Acknowledgment
 
