@@ -2,7 +2,7 @@ FROM debian:buster-slim
 LABEL Author="@apazga"
 
 # pgModeler version to use
-ENV PG_VERSION 0.9.4-beta1
+ENV PG_VERSION 0.9.4
 
 ADD https://codeload.github.com/pgmodeler/pgmodeler/tar.gz/v${PG_VERSION} /usr/local/src/
 WORKDIR /usr/local/src/
