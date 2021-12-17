@@ -1,15 +1,14 @@
 <# 
     Script to launch pgModeler
-    - Use custom IP (192.168.1.100) for DISPLAY environment variable or try to find it automatically
-    - Mounts data folder (current directory) as /data
+    - Mounts data folder in current directory to save pgModeler projects, config and plugins
 #>
 
-# Use custom IP
-# Set-Variable -name DISPLAY -value 192.168.1.100:0.0
 
-# Try to get your LAN IP automatically
-Set-Variable -name IPADDR -value ((Get-NetIPAddress).IPAddress -like "192*").Trim()
+# These settings are default one and should not be modified here, because a "git pull" would override your changes.
+# Instead, define your variables in a separate .env file.
 Set-Variable -name DISPLAY -value 'host.docker.internal:0.0'
+Set-Variable -name PGMODELER_IMAGE -value 'apazga/docker-pgmodeler:0.9.4'
+Set-Variable -name PROJECT_ROOT -value $PSScriptRoot
 
-Write-Host $DISPLAY
-docker run --rm --name="apazga-pgmodeler" -ti -e DISPLAY=$DISPLAY -v $PSScriptRoot/data:/data apazga/docker-pgmodeler:0.9.4
+
+docker run --rm -ti -e DISPLAY=$DISPLAY -v $PROJECT_ROOT/data/root:/root -v  $PROJECT_ROOT/data/usr/local/lib/docker-pgmodeler/plugins:/usr/local/lib/docker-pgmodeler/plugins $PGMODELER_IMAGE

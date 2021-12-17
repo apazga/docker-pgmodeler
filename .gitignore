@@ -1,0 +1,5 @@
+.env
+.env.linux
+.env.macos
+.env.windows.ps1
+.run.ps1
