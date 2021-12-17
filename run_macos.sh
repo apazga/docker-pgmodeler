@@ -5,7 +5,7 @@
 # These settings are default one and should not be modified here, because a "git pull" would override your changes.
 # Instead, define your variables in a separate .env file.
 HOST_IP=$(ifconfig en0 | grep "inet " | cut -d ' ' -f 2)
-PGMODELER_IMAGE=apazga/docker-pgmodeler:0.9.4-beta1
+PGMODELER_IMAGE=apazga/docker-pgmodeler:0.9.4
 PROJECT_ROOT=/Users/toto/docker-pgmodeler
 
 # Override environment variables with those from the .env file
