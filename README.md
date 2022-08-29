@@ -1,5 +1,7 @@
 # pgModeler Docker container
 
+![Docker Pulls](https://img.shields.io/docker/pulls/apazga/docker-pgmodeler) ![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/apazga/docker-pgmodeler)
+
 This image compiles & run pgModeler inside a Docker container.
 
 ## Usage
