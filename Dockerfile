@@ -2,7 +2,7 @@ FROM debian:bullseye-slim
 LABEL Author="@apazga"
 
 # pgModeler version to use
-ENV PG_VERSION 1.0.0-alpha1
+ENV PG_VERSION 1.0.0-beta
 
 ADD https://codeload.github.com/pgmodeler/pgmodeler/tar.gz/v${PG_VERSION} /usr/local/src/
 WORKDIR /usr/local/src/
