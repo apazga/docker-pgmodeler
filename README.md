@@ -96,6 +96,13 @@ If you want to build the image using the Dockerfile provided (it can take a whil
 
 Full changelog: <https://github.com/pgmodeler/pgmodeler/blob/v1.0.0-beta1/CHANGELOG.md>
 
+
+## Contributors
+
+ - [rbrdevs](https://github.com/rbrdevs) (PowerShell script enhancement)
+ - [Merinorus](https://github.com/Merinorus) (MacOS script & PowerShell script enhancement)
+ 
+ 
 ## Acknowledgment
 
 Thanks [rkhaotix](https://github.com/rkhaotix) for your amazing work with pgModeler, a reference (and open source) tool to PostgreSQL community.
