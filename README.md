@@ -101,6 +101,7 @@ Full changelog: <https://github.com/pgmodeler/pgmodeler/blob/v1.0.0-beta1/CHANGE
 
  - [rbrdevs](https://github.com/rbrdevs) (PowerShell script enhancement)
  - [Merinorus](https://github.com/Merinorus) (MacOS script & PowerShell script enhancement)
+ - [yuryalencar](https://github.com/yuryalencar) (Medium post & Gist for MacOS users)
  
  
 ## Acknowledgment
