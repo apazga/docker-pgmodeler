@@ -48,6 +48,8 @@ Then use the provided script `run.sh`.
 
 ### MacOS
 
+Check first [this Medium post](https://yuryalencar.medium.com/pgmodeler-docker-1e78a1cd1350) and [this Gist](https://gist.github.com/yuryalencar/a6c65a1a0a01cbb90e98e66d13072efc) by [@yuryalencar](https://github.com/yuryalencar)
+
 On MacOS (following instructions tested on MacOS Big Sure), if you wish to run this image, you need to install XQuartz. With brew installed, do this:
 
 ```brew install xquartz```
