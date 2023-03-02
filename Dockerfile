@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:11.6-slim
 LABEL Author="@apazga"
 
 # pgModeler version to use
