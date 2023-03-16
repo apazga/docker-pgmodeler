@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM ubuntu:22.04
 LABEL Author="@apazga"
 
 # pgModeler version to use
@@ -7,13 +7,19 @@ ENV PG_VERSION 1.0.2
 ADD https://codeload.github.com/pgmodeler/pgmodeler/tar.gz/v${PG_VERSION} /usr/local/src/
 WORKDIR /usr/local/src/
 
+# Add universe repository
+RUN apt-get update && apt-get install -y software-properties-common \
+  && add-apt-repository universe
+
 # Install dependencies
-RUN BUILD_PKGS="make g++ qt5-qmake libxml2-dev libpq-dev pkg-config libqt5svg5-dev" \
-  && RUNTIME_PKGS="libqt5core5a libqt5svg5 postgresql-server-dev-all qtbase5-dev mesa-utils libgl1-mesa-dri" \
-  && SECURITY_PKGS="libtiff5 openssl" \
+RUN BUILD_PKGS="qmake6 build-essential libxml2-dev libpq-dev pkg-config cmake" \
+  && RUNTIME_PKGS="qtdeclarative5-dev libqt6core6 libqt6svg6 qttools5-dev qttools5-dev-tools postgresql-server-dev-all qt6-base-dev libqt6svg6-dev" \
+  && SECURITY_PKGS="ca-certificates" \
   && DEBIAN_FRONTEND=noninteractive \
   && apt-get update \
-  && apt-get -y install ${BUILD_PKGS} ${RUNTIME_PKGS} ${SECURITY_PKGS}
+  && apt-get -y install --no-install-recommends ${BUILD_PKGS} ${RUNTIME_PKGS} ${SECURITY_PKGS}
+
+ENV PATH="/usr/lib/qt6/bin:$PATH"
 
 # Compile pgmodeler
 RUN tar xvzf v${PG_VERSION} \
