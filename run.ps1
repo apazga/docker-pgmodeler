@@ -7,7 +7,7 @@
 # These settings are default one and should not be modified here, because a "git pull" would override your changes.
 # Instead, define your variables in a separate .env file.
 Set-Variable -name DISPLAY -value 'host.docker.internal:0.0'
-Set-Variable -name PGMODELER_IMAGE -value 'apazga/docker-pgmodeler:1.0.3'
+Set-Variable -name PGMODELER_IMAGE -value 'apazga/docker-pgmodeler:1.0.4'
 Set-Variable -name PROJECT_ROOT -value $PSScriptRoot
 
 
