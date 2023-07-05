@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:kinetic
 LABEL Author="@apazga"
 
 # pgModeler version to use
