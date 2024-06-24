@@ -105,6 +105,7 @@ If you want to build the image using the Dockerfile provided (it can take a whil
 - 1.1.0
 - 1.1.1
 - 1.1.2
+- 1.1.3
 - 1.2.0-alpha
 
 Full changelog: <https://github.com/pgmodeler/pgmodeler/blob/1.2.0-alpha/CHANGELOG.md>
