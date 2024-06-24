@@ -22,7 +22,7 @@ RUN BUILD_PKGS="qmake6 build-essential libxml2-dev libpq-dev pkg-config cmake" \
 ENV PATH="/usr/lib/qt6/bin:$PATH"
 
 # Compile pgmodeler
-RUN tar xvzf v${PG_VERSION} \
+RUN tar xvzf ${PG_VERSION} \
   && cd pgmodeler-${PG_VERSION} \
   && qmake pgmodeler.pro \
   && make && make install \
