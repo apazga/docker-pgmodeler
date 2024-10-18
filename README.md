@@ -28,11 +28,11 @@ This image compiles & run pgModeler inside a Docker container.
 
     Use it with volumes if needed (e.g. to save!):
 
-    ```docker run -ti -e DISPLAY=$DISPLAY -v F:\data\root:/root apazga/docker-pgmodeler:1.2.0-alpha```
+    ```docker run -ti -e DISPLAY=$DISPLAY -v F:\data\root:/root apazga/docker-pgmodeler:1.1.4```
 
     You can also specify your DISPLAY IP directly if you don't want to define an environment variable:
 
-    ```docker run -ti -e DISPLAY=192.168.1.100:0.0 -v F:\data\root:/root apazga/docker-pgmodeler:1.2.0-alpha```
+    ```docker run -ti -e DISPLAY=192.168.1.100:0.0 -v F:\data\root:/root apazga/docker-pgmodeler:1.1.4```
 
 #### Windows (PowerShell script)
 
@@ -106,9 +106,10 @@ If you want to build the image using the Dockerfile provided (it can take a whil
 - 1.1.1
 - 1.1.2
 - 1.1.3
+- 1.1.4
 - 1.2.0-alpha
 
-Full changelog: <https://github.com/pgmodeler/pgmodeler/blob/1.2.0-alpha/CHANGELOG.md>
+Full changelog: <https://github.com/pgmodeler/pgmodeler/blob/v1.1.4/CHANGELOG.md>
 
 
 ## Contributors

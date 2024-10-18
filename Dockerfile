@@ -2,9 +2,9 @@ FROM ubuntu:22.04
 LABEL Author="@apazga"
 
 # pgModeler version to use
-ENV PG_VERSION 1.2.0-alpha
+ENV PG_VERSION 1.1.4
 
-ADD https://codeload.github.com/pgmodeler/pgmodeler/tar.gz/${PG_VERSION} /usr/local/src/
+ADD https://codeload.github.com/pgmodeler/pgmodeler/tar.gz/v${PG_VERSION} /usr/local/src/
 WORKDIR /usr/local/src/
 
 # Add universe repository
@@ -22,7 +22,7 @@ RUN BUILD_PKGS="qmake6 build-essential libxml2-dev libpq-dev pkg-config cmake" \
 ENV PATH="/usr/lib/qt6/bin:$PATH"
 
 # Compile pgmodeler
-RUN tar xvzf ${PG_VERSION} \
+RUN tar xvzf v${PG_VERSION} \
   && cd pgmodeler-${PG_VERSION} \
   && qmake pgmodeler.pro \
   && make && make install \
