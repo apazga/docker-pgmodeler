@@ -53,7 +53,7 @@ Check first [this Medium post](https://yuryalencar.medium.com/pgmodeler-docker-1
 On MacOS (following instructions tested on MacOS Big Sure), if you wish to run this image, you need to install XQuartz. With brew installed, do this:
 
 ```brew install --cask xquartz```
-
+ 
 Then open XQuartz and allow connections:
 
 ```xquartz > preferences > security > [mark to allow connections from network clients]```
@@ -69,6 +69,8 @@ Then make a copy of the `.env.macos.example` file and name it `.env.macos`. Feel
 Finally, make sure XQuartz is started and launch the script `run_macos.sh`.
 
 **NOTE**: The simplest way to ensure that pgModeler is using XQuartz is right-clicking `XQuartz > Apps > Terminal` and run the `run_macos.sh` script.
+
+For using it without a network connection, you can also use the script `run_macos_local.sh`
 
 I may have forgotten some steps, if any problem please open an issue.
 
