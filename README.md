@@ -52,7 +52,7 @@ Check first [this Medium post](https://yuryalencar.medium.com/pgmodeler-docker-1
 
 On MacOS (following instructions tested on MacOS Big Sure), if you wish to run this image, you need to install XQuartz. With brew installed, do this:
 
-```brew install xquartz```
+```brew install --cask xquartz```
 
 Then open XQuartz and allow connections:
 
