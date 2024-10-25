@@ -54,11 +54,11 @@ On MacOS (following instructions tested on MacOS Big Sure), if you wish to run t
 
 ```brew install xquartz```
 
-Then open Xquartz and allow connections:
+Then open XQuartz and allow connections:
 
 ```xquartz > preferences > security > [mark to allow connections from network clients]```
 
-Add the following line to your .zshrc:
+Add the following line to your .zshrc or run it in your terminal:
 
 ```export DISPLAY=:0```
 
@@ -67,6 +67,8 @@ You can test XQuartz right now with the command `xeyes`. It should launch a litt
 Then make a copy of the `.env.macos.example` file and name it `.env.macos`. Feel free to modify the environment variables.
 
 Finally, make sure XQuartz is started and launch the script `run_macos.sh`.
+
+**NOTE**: The simplest way to ensure that pgModeler is using XQuartz is right-clicking `XQuartz > Apps > Terminal` and run the `run_macos.sh` script.
 
 I may have forgotten some steps, if any problem please open an issue.
 
