@@ -1,8 +1,8 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 LABEL Author="@apazga"
 
 # pgModeler version to use
-ENV PG_VERSION 1.2.0-alpha
+ENV PG_VERSION 1.2.0-alpha1
 
 ADD https://codeload.github.com/pgmodeler/pgmodeler/tar.gz/v${PG_VERSION} /usr/local/src/
 WORKDIR /usr/local/src/
