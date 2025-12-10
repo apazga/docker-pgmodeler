@@ -28,11 +28,11 @@ This image compiles & run pgModeler inside a Docker container.
 
     Use it with volumes if needed (e.g. to save!):
 
-    ```docker run -ti -e DISPLAY=$DISPLAY -v F:\data\root:/root apazga/docker-pgmodeler:1.2.0```
+    ```docker run -ti -e DISPLAY=$DISPLAY -v F:\data\root:/root apazga/docker-pgmodeler:2.0.0-alpha```
 
     You can also specify your DISPLAY IP directly if you don't want to define an environment variable:
 
-    ```docker run -ti -e DISPLAY=192.168.1.100:0.0 -v F:\data\root:/root apazga/docker-pgmodeler:1.2.0```
+    ```docker run -ti -e DISPLAY=192.168.1.100:0.0 -v F:\data\root:/root apazga/docker-pgmodeler:2.0.0-alpha```
 
 #### Windows (PowerShell script)
 
@@ -80,6 +80,12 @@ If you want to build the image using the Dockerfile provided (it can take a whil
 
 ```docker build -t apazga/docker-pgmodeler .```
 
+To build a specific version, use the `--build-arg` parameter:
+
+```docker build --build-arg PG_VERSION=2.0.0-alpha -t apazga/docker-pgmodeler:2.0.0-alpha .```
+
+**Important:** The Dockerfile automatically detects whether you're building version 1.x or 2.x and uses the appropriate build system (qmake for 1.x, CMake for 2.x).
+
 ## Tags
 
 - 0.9.1
@@ -115,8 +121,13 @@ If you want to build the image using the Dockerfile provided (it can take a whil
 - 1.2.0-alpha
 - 1.2.0-alpha1
 - 1.2.0
+- 2.0.0-alpha
 
-Full changelog: <https://github.com/pgmodeler/pgmodeler/blob/v1.2.0/CHANGELOG.md>
+**Note:** pgModeler 2.x introduces significant changes including a new CMake-based build system. The Dockerfile automatically detects the version and uses the appropriate build method.
+
+**Important:** Version 2.0.0-alpha requires Qt 6.6+ (for `QPalette::Accent` feature). This branch uses Ubuntu 25.10 which provides Qt 6.6+. For building version 1.2.0 or earlier, you can use Ubuntu 24.04 LTS by changing the base image in the Dockerfile.
+
+Full changelog: <https://github.com/pgmodeler/pgmodeler/blob/2.0.0-alpha/CHANGELOG.md>
 
 
 ## Contributors
