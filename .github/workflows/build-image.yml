@@ -105,7 +105,7 @@ jobs:
         if: inputs.push
         uses: actions/upload-artifact@v7
         with:
-          name: digests-${{ inputs.version }}-${{ matrix.arch }}
+          name: digests-${{ matrix.arch }}-${{ inputs.version }}
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
@@ -122,7 +122,8 @@ jobs:
       - name: Download digests
         uses: actions/download-artifact@v8
         with:
-          pattern: digests-${{ inputs.version }}-*
+          # The version goes last so 2.1.0 does not also match the digests of 2.1.0-rc1
+          pattern: digests-*-${{ inputs.version }}
           path: ${{ runner.temp }}/digests
           merge-multiple: true
 

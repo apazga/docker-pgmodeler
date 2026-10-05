@@ -35,8 +35,9 @@ permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.event_name == 'pull_request' && format('validate-{0}', github.ref) || 'release' }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  # Publishing runs queue one after another; validation runs never replace a pending publish
+  group: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && 'release' || format('validate-{0}', github.ref) }}
+  cancel-in-progress: ${{ github.event_name != 'schedule' && github.event_name != 'workflow_dispatch' }}
 
 jobs:
   detect:
