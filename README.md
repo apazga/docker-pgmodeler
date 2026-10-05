@@ -102,9 +102,9 @@ Full changelog: <https://github.com/nullptrlabs/pgmodeler/blob/develop/CHANGELOG
 
 ## Contributors
 
- - [rbrdevs](https://github.com/rbrdevs) (PowerShell script enhancement)
- - [Merinorus](https://github.com/Merinorus) (MacOS script & PowerShell script enhancement)
- - [yuryalencar](https://github.com/yuryalencar) (Medium post & Gist for MacOS users)
+ - [rbrdevs](https://github.com/rbrdevs): PowerShell script (2019, [#1](https://github.com/apazga/docker-pgmodeler/pull/1))
+ - [Merinorus](https://github.com/Merinorus): MacOS scripts, `.env` files and PowerShell script enhancement (2021, [#3](https://github.com/apazga/docker-pgmodeler/pull/3))
+ - [yuryalencar](https://github.com/yuryalencar): Medium post & Gist for MacOS users (2023)
 
 
 ## Acknowledgment
