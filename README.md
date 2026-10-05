@@ -78,10 +78,12 @@ I may have forgotten some steps, if any problem please open an issue.
 
 ## Tags
 
-- `latest`: the highest pgModeler version available, **including alpha and beta releases**.
-- `X.Y.Z`, `X.Y.Z-alphaN`, `X.Y.Z-betaN`: a specific pgModeler version.
+![Latest stable](https://img.shields.io/docker/v/apazga/docker-pgmodeler?sort=semver&label=latest%20stable) ![Image size](https://img.shields.io/docker/image-size/apazga/docker-pgmodeler/latest)
 
-All the available tags are listed on [Docker Hub](https://hub.docker.com/r/apazga/docker-pgmodeler/tags). New images support `linux/amd64` and `linux/arm64`; some older tags are `linux/amd64` only.
+- `latest`: the highest pgModeler version available, **including alpha and beta releases**.
+- `X.Y.Z`, `X.Y.Z-alphaN`, `X.Y.Z-betaN`: a specific pgModeler version. To stay on stable releases, pin the version shown in the *latest stable* badge.
+
+All the available tags are listed on [Docker Hub](https://hub.docker.com/r/apazga/docker-pgmodeler/tags) and as [repository tags](https://github.com/apazga/docker-pgmodeler/tags). New images support `linux/amd64` and `linux/arm64`; some older tags are `linux/amd64` only.
 
 The scripts use `latest` by default. To use a specific version set `PGMODELER_IMAGE` in your `.env` file, e.g. `PGMODELER_IMAGE=apazga/docker-pgmodeler:1.2.3`.
 
