@@ -1,0 +1,88 @@
+name: release
+
+on:
+  schedule:
+    - cron: "0 4 * * 1" # Mondays at 04:00 UTC
+  workflow_dispatch:
+    inputs:
+      versions:
+        description: Versions to build, comma separated (empty = every version missing on Docker Hub)
+        type: string
+        default: ""
+      force:
+        description: Rebuild the given versions even if they are already on Docker Hub
+        type: boolean
+        default: false
+      dry_run:
+        description: Only list the versions that would be built
+        type: boolean
+        default: false
+  pull_request:
+    paths:
+      - Dockerfile
+      - .dockerignore
+      - scripts/**
+      - .github/workflows/**
+  push:
+    branches: [master]
+    paths:
+      - Dockerfile
+      - .dockerignore
+      - scripts/**
+      - .github/workflows/**
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('validate-{0}', github.ref) || 'release' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  detect:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.detect.outputs.matrix }}
+      count: ${{ steps.detect.outputs.count }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Test version detection
+        run: python3 -m unittest discover -s scripts -v
+
+      - name: Detect versions to build
+        id: detect
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          VERSIONS: ${{ inputs.versions }}
+          FORCE: ${{ inputs.force }}
+        run: |
+          args=()
+          if [ "$EVENT" = pull_request ] || [ "$EVENT" = push ]; then
+            args+=(--validate)
+          fi
+          if [ -n "$VERSIONS" ]; then
+            args+=(--versions "$VERSIONS")
+          fi
+          if [ "$FORCE" = true ]; then
+            args+=(--force)
+          fi
+          python3 scripts/detect_versions.py "${args[@]}"
+
+  build:
+    name: ${{ matrix.version }}
+    needs: detect
+    if: needs.detect.outputs.count != '0' && !inputs.dry_run
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.detect.outputs.matrix) }}
+    permissions:
+      contents: write
+    uses: ./.github/workflows/build-image.yml
+    with:
+      version: ${{ matrix.version }}
+      base_image: ${{ matrix.base_image }}
+      latest: ${{ matrix.latest }}
+      push: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
+    secrets: inherit

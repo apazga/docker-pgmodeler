@@ -1,0 +1,160 @@
+name: build-image
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        description: pgModeler version, e.g. 2.0.0-beta1
+        type: string
+        required: true
+      base_image:
+        description: Ubuntu image used to build and run pgModeler
+        type: string
+        required: true
+      latest:
+        description: Also tag the image as latest
+        type: boolean
+        default: false
+      push:
+        description: Publish the image and the git tag (false = build and test only)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  IMAGE: apazga/docker-pgmodeler
+
+jobs:
+  build:
+    name: build (${{ matrix.arch }})
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 180
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - arch: amd64
+            platform: linux/amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            platform: linux/arm64
+            runner: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: docker/setup-buildx-action@v4
+
+      - name: Log in to Docker Hub
+        if: inputs.push
+        uses: docker/login-action@v4
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Image labels
+        id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ${{ env.IMAGE }}
+          labels: |
+            org.opencontainers.image.title=pgModeler
+            org.opencontainers.image.description=pgModeler ${{ inputs.version }} running in a Docker container
+            org.opencontainers.image.version=${{ inputs.version }}
+
+      - name: Build
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          platforms: ${{ matrix.platform }}
+          build-args: |
+            PG_VERSION=${{ inputs.version }}
+            BASE_IMAGE=${{ inputs.base_image }}
+          labels: ${{ steps.meta.outputs.labels }}
+          tags: pgmodeler-smoke:${{ inputs.version }}
+          load: true
+
+      - name: Smoke test
+        env:
+          VERSION: ${{ inputs.version }}
+        run: bash scripts/smoke-test.sh "pgmodeler-smoke:$VERSION" "$VERSION"
+
+      - name: Push by digest
+        id: push
+        if: inputs.push
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          platforms: ${{ matrix.platform }}
+          build-args: |
+            PG_VERSION=${{ inputs.version }}
+            BASE_IMAGE=${{ inputs.base_image }}
+          labels: ${{ steps.meta.outputs.labels }}
+          outputs: type=image,name=${{ env.IMAGE }},push-by-digest=true,name-canonical=true,push=true
+
+      - name: Export digest
+        if: inputs.push
+        env:
+          DIGEST: ${{ steps.push.outputs.digest }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/digests"
+          touch "$RUNNER_TEMP/digests/${DIGEST#sha256:}"
+
+      - name: Upload digest
+        if: inputs.push
+        uses: actions/upload-artifact@v7
+        with:
+          name: digests-${{ inputs.version }}-${{ matrix.arch }}
+          path: ${{ runner.temp }}/digests/*
+          if-no-files-found: error
+          retention-days: 1
+
+  merge:
+    if: inputs.push
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Download digests
+        uses: actions/download-artifact@v8
+        with:
+          pattern: digests-${{ inputs.version }}-*
+          path: ${{ runner.temp }}/digests
+          merge-multiple: true
+
+      - uses: docker/setup-buildx-action@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Publish multi-arch image
+        working-directory: ${{ runner.temp }}/digests
+        env:
+          VERSION: ${{ inputs.version }}
+          LATEST: ${{ inputs.latest }}
+        run: |
+          digests=(*)
+          if [ "${#digests[@]}" -ne 2 ]; then
+            echo "::error::expected 2 digests (amd64 + arm64), found ${#digests[@]}"
+            exit 1
+          fi
+          tags=(-t "$IMAGE:$VERSION")
+          if [ "$LATEST" = true ]; then
+            tags+=(-t "$IMAGE:latest")
+          fi
+          docker buildx imagetools create "${tags[@]}" "${digests[@]/#/$IMAGE@sha256:}"
+          docker buildx imagetools inspect "$IMAGE:$VERSION"
+
+      - name: Tag repository
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          git tag -f "$VERSION" "$GITHUB_SHA"
+          git push -f origin "refs/tags/$VERSION"

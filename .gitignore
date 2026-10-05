@@ -3,3 +3,4 @@
 .env.macos
 .env.windows.ps1
 .run.ps1
+__pycache__/
