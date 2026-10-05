@@ -2,3 +2,5 @@
 # Fix shell scripts with lines ending with "CRLF" on Windows
 * text=auto
 *.sh text eol=lf
+# Dockerfile heredocs break with CRLF
+Dockerfile text eol=lf
